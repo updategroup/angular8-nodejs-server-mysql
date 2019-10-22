@@ -1,0 +1,37 @@
+<div>
+    <img src="../../../assets/users.png" id="icon" alt="User Icon" />
+</div>
+<form #signUpForm="ngForm">
+    <input type="text" #fullName="ngModel" [(ngModel)]="user.fullName" name="fullName" placeholder="Full Name" required>
+    <div *ngIf="fullName.invalid && (fullName.dirty || fullName.touched)">
+        <div *ngIf="fullName.errors.required">
+            <label class="validation-message"> <i  class="fa fa-exclamation-triangle"></i> Required full name</label>
+        </div>
+    </div>
+    <input type="text" #email="ngModel" [(ngModel)]="user.email" name="email" placeholder="Email" required [pattern]="emailRegex">
+    <div *ngIf="email.errors?.pattern">
+        <label class="validation-message">Invalid email address.</label>
+    </div>
+    <div *ngIf="email.invalid && (email.dirty || email.touched)">
+        <div *ngIf="email.errors.required">
+            <label class="validation-message"> <i  class="fa fa-exclamation-triangle"></i> Required email</label>
+        </div>
+        <div *ngIf="errEmail">
+            <label class="validation-message"> <i  class="fa fa-exclamation-triangle"></i> Email exist</label>
+        </div>
+    </div>
+    <input type="password" #password="ngModel" [(ngModel)]="user.password" name="password" placeholder="Password" minlength="4" required [ngClass]="{'invalid-textbox' :signUpForm.submitted && !password.valid }">
+    <div *ngIf="password.errors">
+        <label *ngIf="password.errors.minlength" class="validation-message">Enter atleast 4 characters.</label>
+    </div>
+    <div *ngIf="password.invalid && (password.dirty || password.touched)">
+        <div *ngIf="password.errors.required">
+            <label class="validation-message"> <i  class="fa fa-exclamation-triangle"></i> Required password</label>
+        </div>
+    </div>
+    <div class="mb-2">
+        <button type="button" class="btn btn-success" [disabled]="!signUpForm.form.valid" (click)="register(user)">Sign Up</button>
+        <button type="button" class="btn btn-info ml-1"><a href="javascript:;" routerLink="">Home</a></button>
+    </div>
+</form>
+<app-spinner [showSpinner]="showSpinner"></app-spinner>

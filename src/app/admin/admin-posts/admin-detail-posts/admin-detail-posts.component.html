@@ -1,0 +1,107 @@
+<section class="content-header">
+    <button class="btn btn-primary btn-sm" type="button" (click)="back()"><i class="fa fa-arrow-left"></i> Back
+    </button>
+    <button class="btn btn-primary btn-sm ml-1" type="button" (click)="add()"><i class="fa fa-plus"></i> Add
+    </button>
+    <button class="btn btn-success btn-sm ml-1" type="button" [disabled]="!myform.form.valid || !image" (click)="save()"><i
+            class="fa fa-save"></i> Save
+    </button>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <form #myform="ngForm">
+        <div class="row">
+            <div class="col-8">
+                <div class="form-group row">
+                    <label class="col-2">Name</label>
+                    <div class="col-10">
+                        <input type="text" class="form-control form-control-sm" name="title" [(ngModel)]="post.title" #title="ngModel" (change)="nameChange(post.title)" required>
+                        <div *ngIf="title.invalid && (title.dirty || title.touched)">
+                            <div *ngIf="title.errors.required">
+                                <small class="form-text text-muted alert alert-danger"> <i
+                                        class="fa fa-exclamation-triangle"></i> Provider name</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="form-group row">
+                              <label class="col-2">Slug</label>
+                              <div class="col-sm-10">
+                                  <input type="text" class="form-control form-control-sm" (change)="nameChange(post.plug)" name="slug" >
+                              </div>
+                            </div> -->
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group row">
+                            <label class="col-4">Category:</label>
+                            <div class="col-8">
+                                <select [(ngModel)]="post.id_category" name="category" class="form-control form-control-sm">
+                                    <option *ngFor="let item of categories" [ngValue]="item.id">{{item.name_category}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customCheck" name="status" [(ngModel)]="post.status">
+                            <label class="custom-control-label" for="customCheck">Active</label>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label class="col-2">Des short :</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" rows="3" [(ngModel)]="post.description" name="description" #description="ngModel" minlength="130" maxlength="160" required></textarea>
+                        <div *ngIf="description.invalid && (description.dirty || description.touched)">
+                            <div *ngIf="description.errors.required">
+                                <small class="form-text text-muted alert alert-danger"> <i
+                                        class="fa fa-exclamation-triangle"></i> Provider name</small>
+                            </div>
+                            <div *ngIf="description.errors?.minlength">
+
+                                <small class="form-text text-muted alert alert-danger"> <i
+                                        class="fa fa-exclamation-triangle"></i>  Name must be at least 130 characters long.</small>
+                            </div>
+                            <div *ngIf="description.errors?.maxlength">
+
+                                <small class="form-text text-muted alert alert-danger"> <i
+                                        class="fa fa-exclamation-triangle"></i>  Name must be at < 160 characters long.</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label class="col-2">Content:</label>
+                    <div class="col-sm-10">
+                        <!-- <textarea class="form-control" rows="3" [(ngModel)]="post.content" name="content"></textarea> -->
+                        <app-ngx-editor [placeholder]="'Enter text here...'" [spellcheck]="true" [(ngModel)]="post.content" name="content" height="100px" minHeight="50px"></app-ngx-editor>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-4">
+
+                <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
+                <div class="Neon Neon-theme-dragdropbox" (click)="fileInput.click()">
+                    <!-- <input style="opacity: 0;height: 200px; position: absolute"  type="file"> -->
+                    <div class="Neon-input-dragDrop">
+                        <img [src]="image" style="width: 100%" *ngIf="image">
+                        <div class="Neon-input-inner" *ngIf="!image">
+                            <div class="Neon-input-icon">
+                                <i class="fa fa-file-image-o"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+<app-spinner [showSpinner]="showSpinner"></app-spinner>

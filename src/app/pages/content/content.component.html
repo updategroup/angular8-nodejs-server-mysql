@@ -1,0 +1,95 @@
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-md-2"></div>
+        <!-- 1 -->
+        <div class="col-md-8" *ngIf="totalItems==0">
+            <h1 class="text-center">Not found</h1>
+        </div>
+        <div class="col-md-8" *ngIf="totalItems>0">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group row">
+                        <label class="col-auto col-form-label">Sort by</label>
+                        <div class="col-md-6">
+                            <select class="form-control" [(ngModel)]="_order" (change)="sortChange()">
+                                <option value="FEATURE">Feauture</option>
+                                <option value="NEWS">New</option>
+                                <option value="OLD">OLD</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6"></div>
+                <div class="col-md-2">
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label">Show</label>
+                        <div class="col-md-7">
+                            <select class="form-control" [(ngModel)]="_limit" (change)="show()">
+                            <option value=3>3</option>
+                            <option value=5>5</option>
+                            <option value=10>10</option>
+                            <option value=20>20</option>
+                            <option value=30>30</option>
+                        </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card" *ngFor="let item of posts">
+                    <div class="mdl-card__media">
+                        <img class="article-image" src="{{item.avartar}}" border="0" alt="">
+                    </div>
+                    <div class="mdl-card__title" *ngIf="item.id_category==2">
+                        <a class="mdl-card__title-text" href="javascript:;" [routerLink]="['../phap-luat', item.slug]"> {{item.title}}</a>
+                    </div>
+                    <div class="mdl-card__title" *ngIf="item.id_category==4">
+                        <a class="mdl-card__title-text" href="javascript:;" [routerLink]="['../the-gioi', item.slug]"> {{item.title}}</a>
+                    </div>
+                    <div class="mdl-card__title" *ngIf="item.id_category==3">
+                        <a class="mdl-card__title-text" href="javascript:;" [routerLink]="['../goc-nhin', item.slug]"> {{item.title}}</a>
+                    </div>
+                    <div class="mdl-card__title" *ngIf="item.id_category==5">
+                        <a class="mdl-card__title-text" href="javascript:;" [routerLink]="['../kinh-doanh', item.slug]"> {{item.title}}</a>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        {{item.description}}
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="javascript:;" [routerLink]="['../detail', item.slug]">Read more</a>
+                        <a class="mdl-button float-right" href="javascript:;">{{item.date_create | date: 'dd-MM-yyyy'}}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4 d-flex justify-content-center">
+                <div class="col-md-4">
+                    <pagination [totalItems]="totalItems" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" (pageChanged)="pageChanged($event)" [maxSize]="5" [itemsPerPage]="_itemsPerPage" [(ngModel)]="currentPage">
+                    </pagination>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+        <!-- 3 -->
+    </div>
+</div>
+<!--<div class="mdl-grid portfolio-max-width">-->
+<!--    <div class="mdl-cell mdl-card mdl-shadow&#45;&#45;4dp portfolio-card" *ngFor="let item of posts">-->
+<!--        <div class="mdl-card__media">-->
+<!--            <img class="article-image" src="{{item.avartar}}" border="0" alt="">-->
+<!--        </div>-->
+<!--        <div class="mdl-card__title">-->
+<!--            <a class="mdl-card__title-text" href="javascript:;"-->
+<!--               [routerLink]="['../detail', item.slug]"> {{item.title}}</a>-->
+<!--        </div>-->
+<!--        <div class="mdl-card__supporting-text">-->
+<!--            {{item.description}}-->
+<!--        </div>-->
+<!--        <div class="mdl-card__actions mdl-card&#45;&#45;border">-->
+<!--            <a class="mdl-button mdl-button&#45;&#45;colored mdl-js-button mdl-js-ripple-effect mdl-button&#45;&#45;accent"-->
+<!--               href="javascript:;" [routerLink]="['../detail', item.slug]">Read more</a>-->
+<!--            <a class="mdl-button float-right" href="javascript:;">{{item.date_create | date: 'dd-MM-yyyy'}}</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<app-spinner [showSpinner]="showSpinner"></app-spinner>

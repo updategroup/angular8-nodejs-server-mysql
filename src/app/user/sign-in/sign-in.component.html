@@ -1,0 +1,31 @@
+<div>
+    <img src="../../../assets/single_user.png" id="icon" alt="User Icon" />
+</div>
+<form #signInForm="ngForm">
+    <input type="text" name="email" #email="ngModel" [(ngModel)]="user.email" placeholder="Email" [pattern]="emailRegex" required>
+    <div *ngIf="email.errors?.pattern">
+        <label class="validation-message">Invalid email address.</label>
+    </div>
+    <div *ngIf="email.invalid && (email.dirty || email.touched)">
+        <div *ngIf="email.errors.required">
+            <label class="validation-message"> <i  class="fa fa-exclamation-triangle"></i> Required gmail</label>
+        </div>
+    </div>
+    <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password" placeholder="Password" required>
+    <div *ngIf="password.invalid && (password.dirty || password.touched)">
+        <div *ngIf="password.errors.required">
+            <label class="validation-message"> <i  class="fa fa-exclamation-triangle"></i> Required password</label>
+        </div>
+    </div>
+    <div *ngIf="errFail">
+        <label class="validation-message">Account False.</label>
+    </div>
+    <div>
+        <button type="button" class="btn btn-success" [disabled]="!signInForm.form.valid" (click)="onSubmit()">Login</button>
+        <button type="button" class="btn btn-info ml-1 mr-1"><a href="javascript:;" routerLink="">Home</a></button>
+        <button *ngIf="currentUser && currentUser.role=='ADMIN'" type="button" class="btn btn-primary ml-1 mr-1"><a href="javascript:;" routerLink="/admin">Admin</a></button>
+    </div>
+
+
+</form>
+<app-spinner [showSpinner]="showSpinner"></app-spinner>

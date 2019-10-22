@@ -1,0 +1,42 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { AdminListCategoryComponent } from './admin-list-category/admin-list-category.component';
+import { AdminCategoryRoutingModule } from './admin-category-routing.module';
+import { AdminDetailCategoryComponent } from './admin-detail-category/admin-detail-category.component';
+import { HttpClientModule } from '@angular/common/http';
+import { CategoryService } from '../../service/category.service';
+import { PipeModule } from '../../pipe/pipe.module';
+import { FormsModule } from '@angular/forms';
+import {ModalModule} from 'ngx-bootstrap';
+import {AuthenticationService} from '../../service/authentication.service';
+import {AuthGuard} from '../../guard/auth.guard';
+import {AlertService} from '../../service/alert.service';
+import {JwtInterceptorProvider} from '../../helpers/jwt.interceptor';
+import {ErrorInterceptorProvider} from '../../helpers/error.interceptor';
+import { SharedModule } from 'src/app/pages/shared/shared.module';
+
+@NgModule({
+  declarations: [
+    AdminListCategoryComponent,
+    AdminDetailCategoryComponent,
+    
+  ],
+  imports: [
+    CommonModule,
+    AdminCategoryRoutingModule,
+    HttpClientModule,
+    PipeModule,
+    FormsModule,
+    ModalModule.forRoot(),
+    SharedModule.forRoot()
+  ],
+  providers: [
+    CategoryService,
+    AuthenticationService,
+    AuthGuard,
+    AlertService,
+    JwtInterceptorProvider,
+    ErrorInterceptorProvider
+  ]
+})
+export class AdminCategoriesModule { }

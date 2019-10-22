@@ -1,0 +1,65 @@
+<header>
+
+    <div class="top-menu">
+        <ul class="left-area welcome-area mt-2">
+            <li class="hello-blog">Hello , welcome to my blog <span *ngIf="currentUser">{{currentUser.email}}</span></li>
+            <li> You only live once, but if you do it right, once is enough. ― Mae West</li>
+        </ul>
+        <div class="right-area">
+
+            <div class="src-area">
+                <form>
+                    <input class="src-input" type="text" placeholder="Search" (keyup.enter)="searchPost()" [(ngModel)]="_search" name="_search">
+                    <button class="src-btn btn" type="button"><i class="fa fa-search" (click)="searchPost()"></i></button>
+                </form>
+            </div>
+
+            <!--&lt;!&ndash;            <ul class="social-icons">&ndash;&gt;-->
+            <!--&lt;!&ndash;                <li><a href="#"><i class="fa fa-facebook"></i></a></li>&ndash;&gt;-->
+            <!--&lt;!&ndash;                <li><a href="#"><i class="fa fa-twitter"></i></a></li>&ndash;&gt;-->
+            <!--&lt;!&ndash;                <li><a href="#"><i class="fa fa-instagram"></i></a></li>&ndash;&gt;-->
+            <!--&lt;!&ndash;            </ul>&ndash;&gt;-->
+            <!--            &lt;!&ndash; right-area &ndash;&gt;-->
+        </div>
+
+    </div>
+
+    <div class="middle-menu center-text">
+        <a href="javascript:;" class="logo" routerLink=""><img src="../../../assets/pages/images/logo.png" alt="Logo Image"></a>
+    </div>
+
+    <div class="bottom-area">
+
+        <div class="menu-nav-icon" (click)="openMenu()"><i class="fa fa-bars"></i></div>
+
+        <ul class="main-menu" id="navbarNav" [ngStyle]="{'display':active}">
+            <!-- <li class="drop-down"><a href="javascript:;" routerLink="">HOME<i class="fa fa-angle-down"></i></a>
+
+                <ul class="drop-down-menu pl-0">
+                    <li><a href="#">FEATURED</a></li>
+                    <li><a href="#">ABOUT</a></li>
+                </ul>
+
+            </li> -->
+            <!-- <li class="drop-down"><a href="javascript:;" (click)="categoryChange('')" routerLink="">HOME<i class="fa fa-angle-down"></i></a> -->
+            <!-- </li> -->
+            <li><a href="javascript:;" routerLink="/phap-luat">PHÁP LUẬT</a></li>
+            <li><a href="javascript:;" routerLink="/goc-nhin">GÓC NHÌN</a></li>
+            <li><a href="javascript:;" routerLink="/the-gioi">THẾ GIỚI</a></li>
+            <li><a href="javascript:;" routerLink="/kinh-doanh">KINH DOANH</a></li>
+            <li class="drop-down">
+                <a href="javascript:;" class="text-uppercase">{{currentUser?currentUser.fullName:'User'}}<i class="fa fa-angle-down"></i></a>
+                <ul class="drop-down-menu pl-0 text-center">
+                    <li><a href="javascript:;" *ngIf="isAdmin" routerLink="/admin" class="text-uppercase">Admin</a></li>
+                    <li><a href="javascript:;" routerLink="/login" class="text-uppercase">Login</a></li>
+                    <li><a href="javascript:;" routerLink="/register" class="text-uppercase">Register</a></li>
+                    <li><a href="javascript:;" *ngIf="currentUser" (click)="logout()" class="text-uppercase">Logout</a></li>
+                </ul>
+
+            </li>
+        </ul>
+        <!-- main-menu -->
+
+    </div>
+    <!-- conatiner -->
+</header>

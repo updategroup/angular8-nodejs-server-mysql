@@ -1,0 +1,9 @@
+<div class="mdl-grid portfolio-max-width">
+    <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card pape-single-custom">
+        <img src="{{post.avartar}}">
+
+        <h3 class="text-break">{{post.title}}</h3>
+        <span class="pb-3 text-right">{{post.date_create | date: 'dd/MM/yyyy'}}</span>
+        <p [innerHTML]="post.content"></p>
+    </div>
+</div>
