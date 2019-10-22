@@ -10,6 +10,7 @@ import { Post } from 'src/app/models/post';
 })
 export class PageSingleComponent implements OnInit {
   post = new Post();
+  showSpinner=false;
   constructor(
     private route: ActivatedRoute,
     private postService: PostService) { }
@@ -17,8 +18,10 @@ export class PageSingleComponent implements OnInit {
   ngOnInit() {
     const slug = this.route.snapshot.paramMap.get('slug');  // Getting current component's id or information using ActivatedRoute service
     if(slug){
+      this.showSpinner=true;
       this.postService.getBySlug(slug).subscribe(data => {
         if(data.type){
+          this.showSpinner=false;
           this.post = data.item[0] || {};
         }
       })
