@@ -2,7 +2,6 @@ import { Component, OnInit, OnChanges } from '@angular/core';
 import { PostService } from '../../service/post.service';
 import { HttpParams } from '@angular/common/http';
 import { ActivatedRoute, Route, Router } from '@angular/router';
-import { CommonService } from '../../service/common.service';
 
 @Component({
   selector: 'app-content',
@@ -17,7 +16,6 @@ export class ContentComponent implements OnInit, OnChanges {
   _search = '';
   _category ='';
   totalItems = 0;
-  _itemsPerPage=3;
   currentPage =1;
   showSpinner = false;
   _notFound = false;
@@ -43,11 +41,8 @@ export class ContentComponent implements OnInit, OnChanges {
     }
     this.showSpinner= true;
     this.postService.getContenPage(this.setParam()).subscribe((data: any)=>{
-      if(data.type){
         this.setData(data);
-        this.showSpinner= false;
         this.currentPage=1;
-      }
     });
      this.router.routeReuseStrategy.shouldReuseRoute = () => {
       // do your task for before route
@@ -63,11 +58,13 @@ export class ContentComponent implements OnInit, OnChanges {
 
   }
   sortChange(){
+    this.showSpinner=true;
     this.postService.getContenPage(this.setParam()).subscribe(data=>{
       this.setData(data);
     })
   }
   show(){
+    this.showSpinner=true;
     this.postService.getContenPage(this.setParam()).subscribe(data=>{
       this.setData(data);
     })
@@ -91,6 +88,7 @@ export class ContentComponent implements OnInit, OnChanges {
     return param;
   }
   private setData(data){
+    this.showSpinner=false;
     if(!data.type){
       this._notFound = true;
       return this.totalItems=0;
@@ -99,8 +97,5 @@ export class ContentComponent implements OnInit, OnChanges {
     const _data = data;
     this.posts = _data.items || [];
     this.totalItems =_data.toTal;
-    if(this.posts.length==this.totalItems){
-      this.currentPage=1;
-    }
   }
 }

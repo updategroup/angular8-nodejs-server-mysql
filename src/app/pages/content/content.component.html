@@ -67,7 +67,7 @@
             </div>
             <div class="row mt-4 d-flex justify-content-center">
                 <div class="col-md-4">
-                    <pagination [totalItems]="totalItems" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" (pageChanged)="pageChanged($event)" [maxSize]="5" [itemsPerPage]="_itemsPerPage" [(ngModel)]="currentPage">
+                    <pagination [totalItems]="totalItems" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" (pageChanged)="pageChanged($event)" [maxSize]="5" [itemsPerPage]="_limit" [(ngModel)]="currentPage">
                     </pagination>
                 </div>
             </div>
