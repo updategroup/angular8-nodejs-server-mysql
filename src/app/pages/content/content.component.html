@@ -57,7 +57,10 @@
                         {{item.description}}
                     </div>
                     <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="javascript:;" [routerLink]="['../detail', item.slug]">Read more</a>
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="javascript:;" *ngIf="item.id_category==2" [routerLink]="['../phap-luat', item.slug]">Read more</a>
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="javascript:;" *ngIf="item.id_category==4" [routerLink]="['../the-gioi', item.slug]">Read more</a>
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="javascript:;" *ngIf="item.id_category==3" [routerLink]="['../goc-nhin', item.slug]">Read more</a>
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="javascript:;" *ngIf="item.id_category==5" [routerLink]="['../kinh-doanh', item.slug]">Read more</a>
                         <a class="mdl-button float-right" href="javascript:;">{{item.date_create | date: 'dd-MM-yyyy'}}</a>
                     </div>
                 </div>
