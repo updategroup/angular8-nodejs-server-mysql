@@ -2,7 +2,7 @@
     <div class="row mt-5">
         <div class="col-md-2"></div>
         <!-- 1 -->
-        <div class="col-md-8" *ngIf="totalItems==0">
+        <div class="col-md-8" *ngIf="_notFound">
             <h1 class="text-center">Not found</h1>
         </div>
         <div class="col-md-8" *ngIf="totalItems>0">

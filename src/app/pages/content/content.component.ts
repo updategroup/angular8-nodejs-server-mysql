@@ -20,6 +20,7 @@ export class ContentComponent implements OnInit, OnChanges {
   _itemsPerPage=3;
   currentPage =1;
   showSpinner = false;
+  _notFound = false;
   constructor(
     private postService: PostService,
     private router: Router,
@@ -56,13 +57,9 @@ export class ContentComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-
-      console.log(this.router.url.toString());
-      
      
   }
   ngOnChanges(){
-    console.log('ngonChange');
 
   }
   sortChange(){
@@ -77,8 +74,10 @@ export class ContentComponent implements OnInit, OnChanges {
   }
   pageChanged(event){
     this._page = event.page;
+    this.showSpinner= true;
     this.postService.getContenPage(this.setParam()).subscribe(data=>{
       this.setData(data);
+      this.showSpinner= false;
     })
 
   }
@@ -93,8 +92,10 @@ export class ContentComponent implements OnInit, OnChanges {
   }
   private setData(data){
     if(!data.type){
+      this._notFound = true;
       return this.totalItems=0;
     }
+    this._notFound = false;
     const _data = data;
     this.posts = _data.items || [];
     this.totalItems =_data.toTal;
