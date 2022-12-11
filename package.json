@@ -19,7 +19,7 @@
         "@angular/platform-browser": "~8.2.0",
         "@angular/platform-browser-dynamic": "~8.2.0",
         "@angular/router": "~8.2.0",
-        "express": "^4.17.1",
+        "express": "^4.17.3",
         "ngx-bootstrap": "^5.1.2",
         "ngx-editor": "^4.1.0",
         "ngx-toastr": "^9.2.0",
